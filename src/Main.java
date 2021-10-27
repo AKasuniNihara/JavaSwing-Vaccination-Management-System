@@ -1,3 +1,7 @@
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -20,6 +24,10 @@ public class Main extends javax.swing.JFrame {
         vaccine.setEnabled(false);
         division.setEnabled(false);
         sendmsg.setEnabled(false);
+        
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize();
+        setLocation(size.width/2 - getWidth()/2, size.height/2 - getHeight()/2);
 
     }
     public void enableButtons()
@@ -221,7 +229,9 @@ public class Main extends javax.swing.JFrame {
 
     private void personalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_personalActionPerformed
         // TODO add your handling code here:
-       
+       dispose();
+       Personal view = new Personal();
+       view.setVisible(true);
     }//GEN-LAST:event_personalActionPerformed
 
     /**

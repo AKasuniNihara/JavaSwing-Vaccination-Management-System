@@ -1,32 +1,35 @@
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author MyPc
- */
 public class Personal extends javax.swing.JFrame {
-    
+
     Connection con = null;
     Statement stmt = null;
     ResultSet rs = null;
-    /**
-     * Creates new form Personal
-     */
+
     public Personal() {
         initComponents();
-         con = databaseConnection.connection();
+        con = databaseConnection.connection();
+
+        vaccinecombo.setEnabled(false);
+        dose1.setEnabled(false);
+        dose2.setEnabled(false);
+        vacDetlbl.setVisible(false);
+        
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize();
+        setLocation(size.width/2 - getWidth()/2, size.height/2 - getHeight()/2);
+
+        
     }
 
     /**
@@ -68,6 +71,9 @@ public class Personal extends javax.swing.JFrame {
         dose1 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         dose2 = new javax.swing.JTextField();
+        vaccined1 = new javax.swing.JButton();
+        closeVaccinated = new javax.swing.JButton();
+        vacDetlbl = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         addbtn = new javax.swing.JButton();
         updatebtn = new javax.swing.JButton();
@@ -305,27 +311,61 @@ public class Personal extends javax.swing.JFrame {
             }
         });
 
+        vaccined1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        vaccined1.setText("Vaccined");
+        vaccined1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vaccined1ActionPerformed(evt);
+            }
+        });
+
+        closeVaccinated.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        closeVaccinated.setForeground(new java.awt.Color(255, 0, 0));
+        closeVaccinated.setText("X");
+        closeVaccinated.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeVaccinatedActionPerformed(evt);
+            }
+        });
+
+        vacDetlbl.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        vacDetlbl.setText("Added Vaccination Details");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(dose1)
-                    .addComponent(vaccinecombo, 0, 160, Short.MAX_VALUE)
-                    .addComponent(dose2))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(vaccined1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(closeVaccinated))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(dose1)
+                            .addComponent(vaccinecombo, 0, 160, Short.MAX_VALUE)
+                            .addComponent(dose2))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(vacDetlbl)
+                .addGap(57, 57, 57))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(13, 13, 13)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(vaccined1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(closeVaccinated))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(vaccinecombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -337,6 +377,8 @@ public class Personal extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dose2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(vacDetlbl)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -380,7 +422,7 @@ public class Personal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(updatebtn, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                    .addComponent(updatebtn, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
                     .addComponent(resetbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(deletebtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -407,9 +449,7 @@ public class Personal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -417,8 +457,8 @@ public class Personal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -465,12 +505,73 @@ public class Personal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_idnoActionPerformed
 
-    private void addbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbtnActionPerformed
-        // TODO add your handling code here:
-        try
-        {
+    private void addDose2VaccinationDetails(String ID) {
+        try {
             stmt = con.createStatement();
-            
+
+            String query2 = "SELECT * FROM person_vaccine";
+
+            rs = stmt.executeQuery(query2);
+
+            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+
+            while (rs.next()) {
+
+                if (ID.equals(rs.getString("id"))) {
+                    
+                    long Dose2 = Date.parse(dose2.getText());
+                    java.sql.Date p_dose2 = new java.sql.Date(Dose2);  
+                    
+                    String query1 = "UPDATE person_vaccine SET dose_2=? WHERE id=?";
+
+                    PreparedStatement preparedStmt1 = con.prepareStatement(query1);
+                    
+                    preparedStmt1.setDate(1, p_dose2);
+                    preparedStmt1.setString(2, ID);
+                    
+                    preparedStmt1.executeUpdate();
+
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void addDose1VaccinationDetails() {
+        try {
+            stmt = con.createStatement();
+
+            String p_idno = idno.getText();
+            String p_vaccine = (String) vaccinecombo.getSelectedItem();
+            long Dose1 = Date.parse(dose1.getText());
+            java.sql.Date p_dose1 = new java.sql.Date(Dose1);
+
+            String query2 = "INSERT INTO person_vaccine (id, vaccine_name, dose_1, dose_2) VALUES(?,?,?,?)";
+
+            PreparedStatement preparedStmt2 = con.prepareStatement(query2);
+
+            preparedStmt2.setString(1, p_idno);
+            preparedStmt2.setString(2, p_vaccine);
+            preparedStmt2.setDate(3, p_dose1);
+            preparedStmt2.setDate(4, p_dose1);
+
+            preparedStmt2.execute();
+
+            vacDetlbl.setVisible(true);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void addbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbtnActionPerformed
+
+        try {
+
+            stmt = con.createStatement();
+
             String p_idno = idno.getText();
             String p_firstname = firstname.getText();
             String p_lastname = lastname.getText();
@@ -478,91 +579,150 @@ public class Personal extends javax.swing.JFrame {
             String p_street = street.getText();
             String p_city = city.getText();
             int p_phone = Integer.parseInt(phone.getText());
-            String p_vaccine = (String) vaccinecombo.getSelectedItem();
-            long Dose1 = Date.parse(dose1.getText());
-            java.sql.Date p_dose1 = new java.sql.Date(Dose1);
-            long Dose2 = Date.parse(dose2.getText());
-            java.sql.Date p_dose2 = new java.sql.Date(Dose2);      
-            
-            String query = "INSERT INTO personaldetails (id_no, first_name, last_name, house_no, street, city, phone, vaccine_name, dose_01, dose_02) VALUES(?,?,?,?,?,?,?,?,?,?)";
-            
-            PreparedStatement preparedStmt = con.prepareStatement(query);
-            
-            preparedStmt.setString(1, p_idno);
-            preparedStmt.setString(2, p_firstname);
-            preparedStmt.setString(3, p_lastname);
-            preparedStmt.setString(4, p_houseno);
-            preparedStmt.setString(5, p_street);
-            preparedStmt.setString(6, p_city);
-            preparedStmt.setInt(7, p_phone);
-            preparedStmt.setString(8, p_vaccine);
-            preparedStmt.setDate(9, p_dose1);
-            preparedStmt.setDate(10, p_dose2);
-            
-            preparedStmt.execute();
-            JOptionPane.showMessageDialog(null,"Added");
-            
-        }
-        catch(Exception e)
-        {
+
+            try {
+
+                String query = "INSERT INTO personaldetails (id_no, first_name, last_name, house_no, street, city, phone) VALUES(?,?,?,?,?,?,?)";
+
+                PreparedStatement preparedStmt = con.prepareStatement(query);
+
+                preparedStmt.setString(1, p_idno);
+                preparedStmt.setString(2, p_firstname);
+                preparedStmt.setString(3, p_lastname);
+                preparedStmt.setString(4, p_houseno);
+                preparedStmt.setString(5, p_street);
+                preparedStmt.setString(6, p_city);
+                preparedStmt.setInt(7, p_phone);
+
+                preparedStmt.execute();
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+            if (checkDose == 1) {
+                addDose1VaccinationDetails();
+            } else {
+
+                JOptionPane.showMessageDialog(null, "Not vaccinated But Added personal details");
+            }
+
+        } catch (Exception e) {
             System.out.println(e);
         }
     }//GEN-LAST:event_addbtnActionPerformed
 
-    private void searchbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchbtnActionPerformed
-        // TODO add your handling code here:
-        try
-        {
+    private void searchVaccinationDetails(String ID) {
+
+        try {
             stmt = con.createStatement();
-            
-            String p_idno = idno.getText();
-            
-            String query = "SELECT * FROM personaldetails";
-            
-            rs = stmt.executeQuery(query);
-            
-            int flag = 0;
-            
-            while(rs.next())
-            {
-                if(p_idno.equals(rs.getString("id_no")))
-                {
-                    firstname.setText(rs.getString("first_name"));
-                    lastname.setText(rs.getString("last_name"));    
-                    houseno.setText(rs.getString("house_no")); 
-                    street.setText(rs.getString("street"));  
-                    city.setText(rs.getString("city")); 
-                    phone.setText(String.format(0+"%s", rs.getInt("phone")));
-                    vaccinecombo.setSelectedItem(rs.getString("vaccine_name")); 
-                    dose1.setText(String.format("%td", rs.getDate("dose_01")));
-                    dose2.setText(String.format("%td", rs.getDate("dose_02")));
-                     
-                    flag = 1;
+
+            String query2 = "SELECT * FROM person_vaccine";
+
+            rs = stmt.executeQuery(query2);
+
+            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+
+            while (rs.next()) {
+
+                if (ID.equals(rs.getString("id"))) {
+                    
+                    vaccinecombo.setSelectedItem(rs.getString("vaccine_name"));
+
+                    String strDate1 = formatter.format(rs.getDate("dose_1"));
+                    String strDate2 = formatter.format(rs.getDate("dose_2"));
+
+                    if (strDate1.equals(strDate2)) { 
+                        dose1.setText(strDate1);
+                    } else {
+                        
+                        dose1.setText(strDate1);
+                        dose2.setText(strDate2);
+                    }
                 }
             }
-            if(flag == 0)
-            {
-                JOptionPane.showMessageDialog(null,"Sorry!");
-            }
-        }
-        catch(Exception e)
-        {
+
+        } catch (Exception e) {
             System.out.println(e);
+        }
+    }
+
+    private void searchbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchbtnActionPerformed
+
+        try {
             
+            vaccinecombo.setEnabled(true);
+            dose1.setEnabled(true);
+            dose2.setEnabled(true);
+            
+            stmt = con.createStatement();
+
+            String p_idno = idno.getText();
+
+            String query1 = "SELECT * FROM personaldetails";
+
+            rs = stmt.executeQuery(query1);
+
+            while (rs.next()) {
+                if (p_idno.equals(rs.getString("id_no"))) {
+                    firstname.setText(rs.getString("first_name"));
+                    lastname.setText(rs.getString("last_name"));
+                    houseno.setText(rs.getString("house_no"));
+                    street.setText(rs.getString("street"));
+                    city.setText(rs.getString("city"));
+                    phone.setText(String.format(0 + "%s", rs.getInt("phone")));
+                }
+            }
+
+            searchVaccinationDetails(p_idno);
+        } catch (Exception e) {
+            System.out.println(e);
+
         }
     }//GEN-LAST:event_searchbtnActionPerformed
 
     private void resetbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetbtnActionPerformed
-        // TODO add your handling code here:
+
         Reset();
+        vaccinecombo.setEnabled(false);
+        dose1.setEnabled(false);
+        dose2.setEnabled(false);
     }//GEN-LAST:event_resetbtnActionPerformed
 
-    private void updatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebtnActionPerformed
-        // TODO add your handling code here:
-        try
-        {
+    private void updateVaccinationDetails(String ID) {
+        try {
+
             stmt = con.createStatement();
-            
+
+            String query = "SELECT * FROM person_vaccine";
+
+            rs = stmt.executeQuery(query);
+
+            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+
+            while (rs.next()) {
+
+                if (ID.equals(rs.getString("id"))) {
+                    addDose2VaccinationDetails(ID);
+                    vacDetlbl.setVisible(true);
+                    vacDetlbl.setText("Updated Dose 2");
+                } else {
+                    addDose1VaccinationDetails();
+                    vacDetlbl.setVisible(true);
+                    vacDetlbl.setText("Updated Dose 1");
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void updatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebtnActionPerformed
+
+        try {
+            stmt = con.createStatement();
+
             String p_idno = idno.getText();
             String p_firstname = firstname.getText();
             String p_lastname = lastname.getText();
@@ -570,55 +730,43 @@ public class Personal extends javax.swing.JFrame {
             String p_street = street.getText();
             String p_city = city.getText();
             int p_phone = Integer.parseInt(phone.getText());
-            String p_vaccine = (String) vaccinecombo.getSelectedItem();
-            long Dose1 = Date.parse(dose1.getText());
-            java.sql.Date p_dose1 = new java.sql.Date(Dose1);
-            long Dose2 = Date.parse(dose2.getText());
-            java.sql.Date p_dose2 = new java.sql.Date(Dose2);      
-           
-            String query = "UPDATE personaldetails SET first_name=?, last_name=?, house_no=?, street=?, city=?, phone=?, vaccine_name=?, dose_01=?, dose_02=? WHERE id_no=?";
-            
-            PreparedStatement preparedStmt = con.prepareStatement(query);
-            
-            
-            preparedStmt.setString(1, p_firstname);
-            preparedStmt.setString(2, p_lastname);
-            preparedStmt.setString(3, p_houseno);
-            preparedStmt.setString(4, p_street);
-            preparedStmt.setString(5, p_city);
-            preparedStmt.setInt(6, p_phone);
-            preparedStmt.setString(7, p_vaccine);
-            preparedStmt.setDate(8, p_dose1);
-            preparedStmt.setDate(9, p_dose2);
-            preparedStmt.setString(10, p_idno);
-            
-            preparedStmt.executeUpdate();
-            JOptionPane.showMessageDialog(null,"Updated");
-            
-        }
-        catch(Exception e)
-        {
+
+            String query1 = "UPDATE personaldetails SET first_name=?, last_name=?, house_no=?, street=?, city=?, phone=? WHERE id_no=?";
+
+            PreparedStatement preparedStmt1 = con.prepareStatement(query1);
+
+            preparedStmt1.setString(1, p_firstname);
+            preparedStmt1.setString(2, p_lastname);
+            preparedStmt1.setString(3, p_houseno);
+            preparedStmt1.setString(4, p_street);
+            preparedStmt1.setString(5, p_city);
+            preparedStmt1.setInt(6, p_phone);
+
+            preparedStmt1.setString(7, p_idno);
+
+            preparedStmt1.executeUpdate();
+
+            updateVaccinationDetails(p_idno);
+
+        } catch (Exception e) {
             System.out.println(e);
         }
     }//GEN-LAST:event_updatebtnActionPerformed
 
     private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtnActionPerformed
         // TODO add your handling code here:
-        try
-        {
+        try {
             stmt = con.createStatement();
             String p_idno = idno.getText();
-            
-            String query = "DELETE FROM personaldetails WHERE id_no='"+p_idno+"'";
-            
+
+            String query = "DELETE FROM personaldetails WHERE id_no='" + p_idno + "'";
+
             stmt.executeUpdate(query);
-           
+
             Reset();
-            JOptionPane.showMessageDialog(null,"Deleted");
-            
-        }
-        catch(Exception e)
-        {
+            JOptionPane.showMessageDialog(null, "Deleted");
+
+        } catch (Exception e) {
             System.out.println(e);
         }
     }//GEN-LAST:event_deletebtnActionPerformed
@@ -630,9 +778,32 @@ public class Personal extends javax.swing.JFrame {
         view.enableButtons();
         view.setVisible(true);
     }//GEN-LAST:event_mainbtnActionPerformed
-    
-    private void Reset()
-    {
+
+    int checkDose = 0;
+
+    private void vaccined1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaccined1ActionPerformed
+        // TODO add your handling code here:
+        checkDose = 1;
+        vaccinecombo.setEnabled(true);
+        dose1.setEnabled(true);
+    }//GEN-LAST:event_vaccined1ActionPerformed
+
+    private void closeVaccinatedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeVaccinatedActionPerformed
+        // TODO add your handling code here:
+
+        vaccinecombo.setSelectedItem("");
+        dose1.setText("");
+        dose2.setText("");
+
+        checkDose = 0;
+
+        vaccinecombo.setEnabled(false);
+        dose1.setEnabled(false);
+        dose2.setEnabled(false);
+
+    }//GEN-LAST:event_closeVaccinatedActionPerformed
+
+    private void Reset() {
         idno.setText("");
         firstname.setText("");
         lastname.setText("");
@@ -643,8 +814,9 @@ public class Personal extends javax.swing.JFrame {
         vaccinecombo.setSelectedItem("");
         dose1.setText("");
         dose2.setText("");
+        vacDetlbl.setVisible(false);
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -683,6 +855,7 @@ public class Personal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addbtn;
     private javax.swing.JTextField city;
+    private javax.swing.JButton closeVaccinated;
     private javax.swing.JButton deletebtn;
     private javax.swing.JTextField dose1;
     private javax.swing.JTextField dose2;
@@ -715,6 +888,8 @@ public class Personal extends javax.swing.JFrame {
     private javax.swing.JButton searchbtn;
     private javax.swing.JTextField street;
     private javax.swing.JButton updatebtn;
+    private javax.swing.JLabel vacDetlbl;
     private javax.swing.JComboBox vaccinecombo;
+    private javax.swing.JButton vaccined1;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 14, 2021 at 08:07 PM
+-- Generation Time: Oct 27, 2021 at 08:03 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.3.21
 
@@ -57,9 +57,6 @@ CREATE TABLE IF NOT EXISTS `personaldetails` (
   `street` varchar(30) NOT NULL,
   `city` varchar(30) NOT NULL,
   `phone` int(10) NOT NULL,
-  `vaccine_name` varchar(25) NOT NULL DEFAULT '',
-  `dose_01` date DEFAULT NULL,
-  `dose_02` date NOT NULL,
   PRIMARY KEY (`id_no`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -67,10 +64,35 @@ CREATE TABLE IF NOT EXISTS `personaldetails` (
 -- Dumping data for table `personaldetails`
 --
 
-INSERT INTO `personaldetails` (`id_no`, `first_name`, `last_name`, `house_no`, `street`, `city`, `phone`, `vaccine_name`, `dose_01`, `dose_02`) VALUES
-('996490494v', 'Nihara', 'Bamunusinghe', '198', 'Thalavitiya', 'Parakaduwa', 719037264, 'Cynopharm', '2021-01-09', '2021-10-01'),
-('102030405v', 'Thevinu', 'Anusara', '56', 'Main street', 'Eheliyagoda', 111234567, 'Cynopharm', '2021-10-01', '2021-10-02'),
-('102030406v', 'Thevinu', 'Anusara', '56', 'Main street', 'Eheliyagoda', 111234567, '', '2021-09-09', '2021-10-01');
+INSERT INTO `personaldetails` (`id_no`, `first_name`, `last_name`, `house_no`, `street`, `city`, `phone`) VALUES
+('991234567v', 'Nihara', 'Bamunusinghe', '100', 'Main Street', 'Eheliyagoda', 771234567),
+('981234567v', 'Madara', 'Senewirathne', '200', 'School lane', 'Panadura', 711234567),
+('971234567v', 'Geethma', 'Rajapaksha', '300', 'AB place', 'Galle', 741234567),
+('981111111v', 'Niroshan', 'Dikwella', '111', 'Sooriyaweva', 'Hambantota', 701111111);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `person_vaccine`
+--
+
+DROP TABLE IF EXISTS `person_vaccine`;
+CREATE TABLE IF NOT EXISTS `person_vaccine` (
+  `id` varchar(12) NOT NULL,
+  `vaccine_name` varchar(255) NOT NULL,
+  `dose_1` date NOT NULL,
+  `dose_2` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `person_vaccine`
+--
+
+INSERT INTO `person_vaccine` (`id`, `vaccine_name`, `dose_1`, `dose_2`) VALUES
+('981234567v', 'Cynopharm', '2021-10-10', '2021-10-10'),
+('971234567v', 'Phizer', '2021-01-09', '2021-02-10'),
+('981111111v', 'Moderna', '2021-01-10', '2021-01-10');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
