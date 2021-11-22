@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 27, 2021 at 08:03 PM
+-- Generation Time: Nov 22, 2021 at 09:12 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.3.21
 
@@ -41,6 +41,23 @@ CREATE TABLE IF NOT EXISTS `admin` (
 
 INSERT INTO `admin` (`user_id`, `username`, `password`) VALUES
 (1, 'admin', '1234');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `divisiondetails`
+--
+
+DROP TABLE IF EXISTS `divisiondetails`;
+CREATE TABLE IF NOT EXISTS `divisiondetails` (
+  `divisionID` varchar(10) NOT NULL,
+  `divisionName` varchar(255) NOT NULL,
+  `officer` varchar(255) NOT NULL,
+  `vaccine` varchar(255) NOT NULL,
+  `dose` int(11) NOT NULL,
+  `date` date NOT NULL,
+  PRIMARY KEY (`divisionID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -93,6 +110,29 @@ INSERT INTO `person_vaccine` (`id`, `vaccine_name`, `dose_1`, `dose_2`) VALUES
 ('981234567v', 'Cynopharm', '2021-10-10', '2021-10-10'),
 ('971234567v', 'Phizer', '2021-01-09', '2021-02-10'),
 ('981111111v', 'Moderna', '2021-01-10', '2021-01-10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vaccine_details`
+--
+
+DROP TABLE IF EXISTS `vaccine_details`;
+CREATE TABLE IF NOT EXISTS `vaccine_details` (
+  `vaccineID` varchar(11) NOT NULL,
+  `vaccineName` varchar(255) NOT NULL,
+  `numOfDose` int(11) NOT NULL,
+  PRIMARY KEY (`vaccineID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `vaccine_details`
+--
+
+INSERT INTO `vaccine_details` (`vaccineID`, `vaccineName`, `numOfDose`) VALUES
+('v1', 'Synopharm', 2),
+('v2', 'Phizer', 2),
+('v3', 'Moderna', 2);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

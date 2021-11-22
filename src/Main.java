@@ -99,6 +99,11 @@ public class Main extends javax.swing.JFrame {
         division.setText("Division Details");
         division.setBorder(null);
         division.setBorderPainted(false);
+        division.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                divisionActionPerformed(evt);
+            }
+        });
 
         vaccine.setBackground(new java.awt.Color(255, 255, 255));
         vaccine.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -233,6 +238,14 @@ public class Main extends javax.swing.JFrame {
        Personal view = new Personal();
        view.setVisible(true);
     }//GEN-LAST:event_personalActionPerformed
+
+    private void divisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divisionActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        Division view = new Division();
+        view.setVisible(true);
+        
+    }//GEN-LAST:event_divisionActionPerformed
 
     /**
      * @param args the command line arguments
