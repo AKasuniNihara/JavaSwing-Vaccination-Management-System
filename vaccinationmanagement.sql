@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 22, 2021 at 09:12 PM
+-- Generation Time: Nov 23, 2021 at 07:37 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.3.21
 
@@ -50,14 +50,21 @@ INSERT INTO `admin` (`user_id`, `username`, `password`) VALUES
 
 DROP TABLE IF EXISTS `divisiondetails`;
 CREATE TABLE IF NOT EXISTS `divisiondetails` (
-  `divisionID` varchar(10) NOT NULL,
+  `divisionID` int(10) NOT NULL AUTO_INCREMENT,
   `divisionName` varchar(255) NOT NULL,
-  `officer` varchar(255) NOT NULL,
   `vaccine` varchar(255) NOT NULL,
   `dose` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY (`divisionID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `divisiondetails`
+--
+
+INSERT INTO `divisiondetails` (`divisionID`, `divisionName`, `vaccine`, `dose`, `quantity`, `date`) VALUES
+(1, 'division2', 'Synopharm', 2, 100, '2021-10-10');
 
 -- --------------------------------------------------------
 

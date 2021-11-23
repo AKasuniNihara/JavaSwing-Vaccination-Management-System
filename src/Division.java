@@ -1,5 +1,6 @@
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,6 +33,9 @@ public class Division extends javax.swing.JFrame {
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
         setLocation(size.width/2 - getWidth()/2, size.height/2 - getHeight()/2);
+        
+        setIconImage(Toolkit.getDefaultToolkit().getImage(Division.class.getResource("\\images\\logo.jpg")));
+
     }
 
     /**
@@ -56,17 +60,18 @@ public class Division extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        divname = new javax.swing.JTextField();
         divvaccine = new javax.swing.JComboBox();
         divdose1 = new javax.swing.JRadioButton();
         divdose2 = new javax.swing.JRadioButton();
         divquantity = new javax.swing.JTextField();
         divdate = new javax.swing.JTextField();
+        divname = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         addbtn = new javax.swing.JButton();
         updatebtn = new javax.swing.JButton();
         resetbtn = new javax.swing.JButton();
         deletebtn = new javax.swing.JButton();
+        mainbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,8 +108,6 @@ public class Division extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Date");
 
-        divname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
         divvaccine.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         divvaccine.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Synopharm", "Phiser", "Moderna", "Astrasenica" }));
 
@@ -127,6 +130,9 @@ public class Division extends javax.swing.JFrame {
         divquantity.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         divdate.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        divname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        divname.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "division1", "division2", "division3", "division4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -155,7 +161,7 @@ public class Division extends javax.swing.JFrame {
                 .addComponent(divdose2)
                 .addGap(18, 18, 18)
                 .addComponent(divquantity, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(divdate, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -171,12 +177,12 @@ public class Division extends javax.swing.JFrame {
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(divname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(divvaccine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(divdose1)
                     .addComponent(divdose2)
                     .addComponent(divquantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(divdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(divdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(divname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -239,12 +245,22 @@ public class Division extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        mainbtn.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        mainbtn.setText("Main");
+        mainbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mainbtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(38, 38, 38)
+                .addComponent(mainbtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(322, 322, 322))
             .addGroup(layout.createSequentialGroup()
@@ -258,8 +274,10 @@ public class Division extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel1)
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(mainbtn))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
@@ -272,48 +290,49 @@ public class Division extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private int checkDose(){
+        if(divdose1.isSelected()){
+            return 1;
+        }
+        else{
+            return 2;
+        }
+    }
+    
     private void addbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbtnActionPerformed
 
         try {
 
             stmt = con.createStatement();
 
-            String d_name = divname.getText();
+            String d_name = (String) divname.getSelectedItem();
             String d_vaccine = (String) divvaccine.getSelectedItem();
-
-            String d_dose1 = divdose1.getText();
-            String d_dose2 = divdose2.getText();
             int d_quantity = Integer.parseInt(divquantity.getText());
             long date = Date.parse(divdate.getText());
             java.sql.Date d_date = new java.sql.Date(date);
-            
+
+            int d_dose = checkDose();
+
             try {
 
-               String query = "INSERT INTO divisiondetails (id_no, first_name, last_name, house_no, street, city, phone) VALUES(?,?,?,?,?,?,?)";
-//
+                String query = "INSERT INTO divisiondetails (divisionName, vaccine, dose, quantity, date) VALUES(?,?,?,?,?)";
+
                 PreparedStatement preparedStmt = con.prepareStatement(query);
-//
-//                preparedStmt.setString(1, p_idno);
-//                preparedStmt.setString(2, p_firstname);
-//                preparedStmt.setString(3, p_lastname);
-//                preparedStmt.setString(4, p_houseno);
-//                preparedStmt.setString(5, p_street);
-//                preparedStmt.setString(6, p_city);
-//                preparedStmt.setInt(7, p_phone);
-//
-//                preparedStmt.execute();
-//
+
+                preparedStmt.setString(1, d_name);
+                preparedStmt.setString(2, d_vaccine);
+                preparedStmt.setInt(3, d_dose);
+                preparedStmt.setInt(4, d_quantity);
+                preparedStmt.setDate(5, d_date);
+
+                preparedStmt.execute();
+
             } catch (Exception e) {
                 System.out.println(e);
             }
-//
-//            if (checkDose == 1) {
-//                addDose1VaccinationDetails();
-//            } else {
-//
-//                JOptionPane.showMessageDialog(null, "Not vaccinated But Added personal details");
-//            }
-//
+
+            JOptionPane.showMessageDialog(null, "Added");
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -332,7 +351,7 @@ public class Division extends javax.swing.JFrame {
 //        divdose1.setSelected(false);
 //        divdose2.setSelected(false);
         
-            String d_name = divname.getText();
+           String d_name = (String) divname.getSelectedItem();
 //            String d_vaccine = divvaccine.getSelectedItem();
             String d_dose1 = divdose1.getText();
             String d_dose2 = divdose2.getText();
@@ -370,7 +389,7 @@ public class Division extends javax.swing.JFrame {
 
     
     private void Reset() {
-        divname.setText("");
+        divname.setSelectedItem("");
         divquantity.setText("");
         divdate.setText("");
         divvaccine.setSelectedItem("");
@@ -382,7 +401,8 @@ public class Division extends javax.swing.JFrame {
         // TODO add your handling code here:
                 try {
             stmt = con.createStatement();
-            String d_name = divname.getText();
+            
+            String d_name = (String) divname.getSelectedItem();
 
 //            String query = "DELETE FROM personaldetails WHERE id_no='" + p_idno + "'";
 //
@@ -405,6 +425,14 @@ public class Division extends javax.swing.JFrame {
         // TODO add your handling code here:
         divdose1.setSelected(false);
     }//GEN-LAST:event_divdose2ActionPerformed
+
+    private void mainbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainbtnActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        Main view = new Main();
+        view.enableButtons();
+        view.setVisible(true);
+    }//GEN-LAST:event_mainbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -451,7 +479,7 @@ public class Division extends javax.swing.JFrame {
     private javax.swing.JTextField divdate;
     private javax.swing.JRadioButton divdose1;
     private javax.swing.JRadioButton divdose2;
-    private javax.swing.JTextField divname;
+    private javax.swing.JComboBox divname;
     private javax.swing.JTextField divquantity;
     private javax.swing.JComboBox divvaccine;
     private javax.swing.JLabel jLabel1;
@@ -464,6 +492,7 @@ public class Division extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton mainbtn;
     private javax.swing.JButton resetbtn;
     private javax.swing.JButton updatebtn;
     // End of variables declaration//GEN-END:variables
